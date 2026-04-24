@@ -15,7 +15,6 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>umbraco;localgov;uk-local-government;govuk-frontend;local-gov</PackageTags>
     <PackageIcon>icon.png</PackageIcon>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
     <Copyright>Copyright © LocalGov Umbraco Community</Copyright>
 
     <!-- Version — overridden by CI via /p:Version=$(GitVersion) -->
@@ -33,5 +32,10 @@
   <!-- Umbraco Marketplace manifest: set pack metadata on the already-implicitly-included JSON file -->
   <ItemGroup Condition="Exists('$(MSBuildProjectDirectory)\umbraco-marketplace.json')">
     <Content Update="umbraco-marketplace.json" Pack="true" PackagePath="." />
+  </ItemGroup>
+
+  <!-- Package icon shared across all packages -->
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)assets\icon.png" Pack="true" PackagePath="\" Visible="false" />
   </ItemGroup>
 </Project>
