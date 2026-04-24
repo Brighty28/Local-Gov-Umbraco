@@ -1,0 +1,20 @@
+{
+  "$schema": "https://marketplace.umbraco.com/umbraco-marketplace-schema.json",
+  "name": "LocalGov.Umbraco.Core",
+  "friendlyName": "LocalGov Umbraco - Core",
+  "description": "Core foundation for LocalGov Umbraco: ILocalGovContentHelper for resolving well-known content nodes, breadcrumb, side nav, pagination ViewComponents, GOV.UK Frontend layout, uSync composition definitions, and shared search service. Required by all other LocalGov Umbraco packages.",
+  "version": "1.0.0",
+  "minimumUmbracoVersion": "13.0.0",
+  "maximumUmbracoVersion": "13.99.99",
+  "tags": [
+    "LocalGov",
+    "UK Local Government",
+    "GOV.UK Frontend",
+    "Core",
+    "Foundation"
+  ],
+  "logo": "https://raw.githubusercontent.com/Brighty28/Local-Gov-Umbraco/main/assets/icon.png",
+  "projectUrl": "https://github.com/Brighty28/Local-Gov-Umbraco",
+  "licenseUrl": "https://github.com/Brighty28/Local-Gov-Umbraco/blob/main/LICENSE",
+  "bugTrackerUrl": "https://github.com/Brighty28/Local-Gov-Umbraco/issues"
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://marketplace.umbraco.com/umbraco-marketplace-schema.json",
+  "name": "LocalGov.Umbraco.Guides",
+  "friendlyName": "LocalGov Umbraco - Guides",
+  "description": "Multi-page guides with sidebar navigation and previous/next pagination for UK local government websites. Equivalent of LocalGov Drupal's localgov_guides module.",
+  "version": "1.0.0",
+  "minimumUmbracoVersion": "13.0.0",
+  "maximumUmbracoVersion": "13.99.99",
+  "tags": [
+    "LocalGov",
+    "UK Local Government",
+    "GOV.UK Frontend",
+    "Guides",
+    "Multi-page"
+  ],
+  "logo": "https://raw.githubusercontent.com/Brighty28/Local-Gov-Umbraco/main/assets/icon.png",
+  "projectUrl": "https://github.com/Brighty28/Local-Gov-Umbraco",
+  "licenseUrl": "https://github.com/Brighty28/Local-Gov-Umbraco/blob/main/LICENSE",
+  "bugTrackerUrl": "https://github.com/Brighty28/Local-Gov-Umbraco/issues"
+}

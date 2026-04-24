@@ -1,0 +1,21 @@
+{
+  "$schema": "https://marketplace.umbraco.com/umbraco-marketplace-schema.json",
+  "name": "LocalGov.Umbraco.AlertBanner",
+  "friendlyName": "LocalGov Umbraco - Alert Banner",
+  "description": "Emergency and informational alert banners for UK local government websites: four severity levels (announcement, minor, major, notable death), dismissible alerts with localStorage, page-scoped or site-wide targeting, and scheduled publish/unpublish. Equivalent of LocalGov Drupal's localgov_alert_banner module.",
+  "version": "1.0.0",
+  "minimumUmbracoVersion": "13.0.0",
+  "maximumUmbracoVersion": "13.99.99",
+  "tags": [
+    "LocalGov",
+    "UK Local Government",
+    "GOV.UK Frontend",
+    "Alert Banner",
+    "Emergency",
+    "Notifications"
+  ],
+  "logo": "https://raw.githubusercontent.com/Brighty28/Local-Gov-Umbraco/main/assets/icon.png",
+  "projectUrl": "https://github.com/Brighty28/Local-Gov-Umbraco",
+  "licenseUrl": "https://github.com/Brighty28/Local-Gov-Umbraco/blob/main/LICENSE",
+  "bugTrackerUrl": "https://github.com/Brighty28/Local-Gov-Umbraco/issues"
+}

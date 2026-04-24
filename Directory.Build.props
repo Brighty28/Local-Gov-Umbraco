@@ -29,4 +29,9 @@
   <ItemGroup>
     <Content Update="uSync\**\*" CopyToOutputDirectory="PreserveNewest" Pack="true" PackagePath="contentFiles\any\any\uSync\" />
   </ItemGroup>
+
+  <!-- Umbraco Marketplace manifest: set pack metadata on the already-implicitly-included JSON file -->
+  <ItemGroup Condition="Exists('$(MSBuildProjectDirectory)\umbraco-marketplace.json')">
+    <Content Update="umbraco-marketplace.json" Pack="true" PackagePath="." />
+  </ItemGroup>
 </Project>

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://marketplace.umbraco.com/umbraco-marketplace-schema.json",
+  "name": "LocalGov.Umbraco.Theme",
+  "friendlyName": "LocalGov Umbraco - Theme",
+  "description": "GOV.UK Frontend v5 compiled CSS and JavaScript for UK local government Umbraco websites. Includes ThemeTagHelper for injecting per-council brand colours and the lgSettings content type for site-wide configuration.",
+  "version": "1.0.0",
+  "minimumUmbracoVersion": "13.0.0",
+  "maximumUmbracoVersion": "13.99.99",
+  "tags": [
+    "LocalGov",
+    "UK Local Government",
+    "GOV.UK Frontend",
+    "Theme",
+    "Accessibility",
+    "WCAG"
+  ],
+  "logo": "https://raw.githubusercontent.com/Brighty28/Local-Gov-Umbraco/main/assets/icon.png",
+  "projectUrl": "https://github.com/Brighty28/Local-Gov-Umbraco",
+  "licenseUrl": "https://github.com/Brighty28/Local-Gov-Umbraco/blob/main/LICENSE",
+  "bugTrackerUrl": "https://github.com/Brighty28/Local-Gov-Umbraco/issues"
+}
