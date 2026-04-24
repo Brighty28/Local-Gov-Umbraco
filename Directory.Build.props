@@ -23,10 +23,13 @@
     <FileVersion>1.0.0.0</FileVersion>
   </PropertyGroup>
 
-  <!-- uSync config files: the RCL SDK already includes them implicitly as Content.
-       Use Update (not Include) to set packaging metadata on the already-included items. -->
+  <!-- uSync config files ship as EmbeddedResource so the runtime deployment component
+       (LocalGov.Umbraco.Core.Components.USyncDeploymentComponent) can materialise them
+       to the host site's /uSync/v13 folder on first boot. contentFiles does not work
+       with SDK-style PackageReference projects. -->
   <ItemGroup>
-    <Content Update="uSync\**\*" CopyToOutputDirectory="PreserveNewest" Pack="true" PackagePath="contentFiles\any\any\uSync\" />
+    <Content Remove="uSync\**\*" />
+    <EmbeddedResource Include="uSync\**\*" />
   </ItemGroup>
 
   <!-- Umbraco Marketplace manifest: set pack metadata on the already-implicitly-included JSON file -->

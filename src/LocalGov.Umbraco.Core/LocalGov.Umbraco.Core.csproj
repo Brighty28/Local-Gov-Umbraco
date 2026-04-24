@@ -11,7 +11,7 @@
   <ItemGroup>
     <PackageReference Include="Umbraco.Cms.Web.Website" />
     <PackageReference Include="Umbraco.Cms.Web.BackOffice" />
-    <PackageReference Include="uSync.Core" />
+    <PackageReference Include="uSync" />
   </ItemGroup>
 
   <!-- Embed uSync config files as content so they're included in the NuGet package -->

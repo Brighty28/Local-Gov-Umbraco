@@ -13,9 +13,8 @@
     <PackageVersion Include="Umbraco.Cms.Imaging.ImageSharp" Version="13.12.1" />
     <PackageVersion Include="Umbraco.Forms" Version="13.8.0" />
 
-    <!-- uSync -->
+    <!-- uSync: the full metapackage pulls in uSync.BackOffice, required for startup import of embedded schemas -->
     <PackageVersion Include="uSync" Version="13.3.2" />
-    <PackageVersion Include="uSync.Core" Version="13.3.2" />
 
     <!-- Background tasks -->
     <PackageVersion Include="Cultiv.Hangfire" Version="3.1.2" />
