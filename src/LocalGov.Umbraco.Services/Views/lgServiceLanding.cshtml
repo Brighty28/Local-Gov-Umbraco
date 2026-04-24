@@ -1,0 +1,22 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+    Layout = "_Layout.cshtml";
+}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">@Model.Name</h1>
+
+        @if (Model.HasValue("summary"))
+        {
+            <p class="govuk-body-l">@Model.Value("summary")</p>
+        }
+
+        @if (Model.HasValue("main"))
+        {
+            <div class="govuk-body">@Html.Raw(Model.Value("main"))</div>
+        }
+    </div>
+</div>
+
+@await Component.InvokeAsync("ServiceNavCards", new { page = Model })

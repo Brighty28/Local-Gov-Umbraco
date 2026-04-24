@@ -1,0 +1,28 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Extensions
+@{
+    Layout = "_Layout.cshtml";
+    var firstPage = Model.Children?.FirstOrDefault(c => c.IsVisible());
+}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">@Model.Name</h1>
+
+        @if (Model.HasValue("summary"))
+        {
+            <p class="govuk-body-l">@Model.Value("summary")</p>
+        }
+
+        @if (firstPage is not null)
+        {
+            <p class="govuk-body">
+                <a class="govuk-link" href="@firstPage.Url()">Start: @firstPage.Name</a>
+            </p>
+        }
+    </div>
+
+    <div class="govuk-grid-column-one-third">
+        @await Component.InvokeAsync("GuideNav", new { currentPage = Model })
+    </div>
+</div>

@@ -1,0 +1,24 @@
+@model IEnumerable<Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent>
+@using Umbraco.Extensions
+
+<section class="govuk-!-margin-bottom-8">
+    <h2 class="govuk-heading-l">Latest news</h2>
+    <ul class="govuk-list">
+        @foreach (var item in Model)
+        {
+            var publishDate = item.Value<DateTime?>("publishDate") ?? item.CreateDate;
+            <li class="govuk-!-margin-bottom-4">
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">
+                    <a class="govuk-link" href="@item.Url()">@item.Name</a>
+                </h3>
+                <p class="govuk-body-s govuk-!-colour-secondary-text-on-light govuk-!-margin-bottom-1">
+                    <time datetime="@publishDate.ToString("yyyy-MM-dd")">@publishDate.ToString("d MMMM yyyy")</time>
+                </p>
+                @if (item.HasValue("summary"))
+                {
+                    <p class="govuk-body govuk-!-margin-bottom-0">@item.Value("summary")</p>
+                }
+            </li>
+        }
+    </ul>
+</section>

@@ -1,0 +1,28 @@
+@model LocalGov.Umbraco.News.Services.NewsListResult
+
+@foreach (var item in Model.Items)
+{
+    var publishDate = item.Value<DateTime?>("publishDate") ?? item.CreateDate;
+    <article class="govuk-!-margin-bottom-6">
+        <h2 class="govuk-heading-m govuk-!-margin-bottom-1">
+            <a class="govuk-link" href="@item.Url()">@item.Name</a>
+        </h2>
+        <p class="govuk-body-s govuk-!-colour-secondary-text-on-light govuk-!-margin-bottom-2">
+            <time datetime="@publishDate.ToString("yyyy-MM-dd")">@publishDate.ToString("d MMMM yyyy")</time>
+        </p>
+        @if (item.HasValue("summary"))
+        {
+            <p class="govuk-body">@item.Value("summary")</p>
+        }
+    </article>
+}
+
+@if (Model.TotalPages > 1)
+{
+    @await Component.InvokeAsync("Pagination", new { currentPage = Model.CurrentPage, totalPages = Model.TotalPages })
+}
+
+@if (!Model.Items.Any())
+{
+    <p class="govuk-body">There are no news articles at this time.</p>
+}

@@ -1,0 +1,15 @@
+@model IEnumerable<Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent>
+@using Umbraco.Extensions
+
+<div class="localgov-service-cards">
+    @foreach (var child in Model)
+    {
+        <a class="localgov-service-card" href="@child.Url()">
+            <span class="localgov-service-card__title">@(child.Value<string>("navTitle") ?? child.Name)</span>
+            @if (child.HasValue("summary"))
+            {
+                <span class="govuk-body-s">@child.Value("summary")</span>
+            }
+        </a>
+    }
+</div>

@@ -1,0 +1,27 @@
+@model LocalGov.Umbraco.Guides.ViewComponents.GuideNavViewModel
+
+@if (Model.Guide is not null)
+{
+    <nav class="localgov-side-nav" aria-label="Guide contents">
+        <h2 class="localgov-side-nav__header">
+            <a class="govuk-link" href="@Model.Guide.Url()">@Model.Guide.Name</a>
+        </h2>
+        <ol class="localgov-side-nav__list">
+            @foreach (var guidePage in Model.Pages)
+            {
+                var isActive = guidePage.Id == Model.CurrentPage?.Id;
+                var guidePageTitle = guidePage.Value<string>("navTitle") ?? guidePage.Name;
+                <li class="localgov-side-nav__item">
+                    @if (isActive)
+                    {
+                        <span class="localgov-side-nav__link--active" aria-current="page">@guidePageTitle</span>
+                    }
+                    else
+                    {
+                        <a class="govuk-link" href="@guidePage.Url()">@guidePageTitle</a>
+                    }
+                </li>
+            }
+        </ol>
+    </nav>
+}
