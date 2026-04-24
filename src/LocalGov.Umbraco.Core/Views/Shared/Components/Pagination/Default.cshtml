@@ -1,0 +1,51 @@
+@model LocalGov.Umbraco.Core.ViewComponents.PaginationModel
+
+<nav class="govuk-body localgov-pagination" aria-label="Pagination">
+    <ul class="localgov-pagination__list">
+        @if (Model.HasPrevious)
+        {
+            <li class="localgov-pagination__item localgov-pagination__item--prev">
+                <a class="govuk-link" href="@Model.BaseUrl?page=@Model.PreviousPage" rel="prev">
+                    <svg class="localgov-pagination__icon localgov-pagination__icon--prev" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 13" focusable="false" aria-hidden="true">
+                        <path d="m6.5938-0.0078125-6.7266 6.7266 6.7441 6.4062 1.377-1.449-4.1856-3.9768h12.896v-2h-12.984l4.2931-4.293-1.414-1.414z" />
+                    </svg>
+                    <span class="govuk-visually-hidden">Previous<span class="govuk-visually-hidden"> page</span></span>
+                    <span aria-hidden="true">Previous</span>
+                </a>
+            </li>
+        }
+
+        @foreach (var pageNum in Model.PageNumbers())
+        {
+            if (pageNum == null)
+            {
+                <li class="localgov-pagination__item localgov-pagination__item--ellipsis" aria-hidden="true">&ctdot;</li>
+            }
+            else if (pageNum == Model.CurrentPage)
+            {
+                <li class="localgov-pagination__item localgov-pagination__item--current">
+                    <a class="govuk-link" href="@Model.BaseUrl?page=@pageNum" aria-label="Page @pageNum" aria-current="page">@pageNum</a>
+                </li>
+            }
+            else
+            {
+                <li class="localgov-pagination__item">
+                    <a class="govuk-link" href="@Model.BaseUrl?page=@pageNum" aria-label="Page @pageNum">@pageNum</a>
+                </li>
+            }
+        }
+
+        @if (Model.HasNext)
+        {
+            <li class="localgov-pagination__item localgov-pagination__item--next">
+                <a class="govuk-link" href="@Model.BaseUrl?page=@Model.NextPage" rel="next">
+                    <span class="govuk-visually-hidden">Next<span class="govuk-visually-hidden"> page</span></span>
+                    <span aria-hidden="true">Next</span>
+                    <svg class="localgov-pagination__icon localgov-pagination__icon--next" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 13" focusable="false" aria-hidden="true">
+                        <path d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7246z" />
+                    </svg>
+                </a>
+            </li>
+        }
+    </ul>
+</nav>

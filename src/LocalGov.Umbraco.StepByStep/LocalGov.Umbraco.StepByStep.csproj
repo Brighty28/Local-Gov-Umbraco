@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+  <PropertyGroup>
+    <PackageId>LocalGov.Umbraco.StepByStep</PackageId>
+    <Title>LocalGov Umbraco - Step By Step</Title>
+    <Description>Linear numbered step-by-step process pages for UK local government websites. Uses GOV.UK Frontend step-nav component. Equivalent of LocalGov Drupal's localgov_step_by_step module.</Description>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Umbraco.Cms.Web.Website" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LocalGov.Umbraco.Core\LocalGov.Umbraco.Core.csproj" />
+  </ItemGroup>
+</Project>

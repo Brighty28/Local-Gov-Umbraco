@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+  <PropertyGroup>
+    <PackageId>LocalGov.Umbraco.Services</PackageId>
+    <Title>LocalGov Umbraco - Services</Title>
+    <Description>Service landing pages, sub-landing pages, and content pages for UK local government websites. Provides the core service/information architecture. Equivalent of LocalGov Drupal's localgov_services module.</Description>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Umbraco.Cms.Web.Website" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LocalGov.Umbraco.Core\LocalGov.Umbraco.Core.csproj" />
+    <ProjectReference Include="..\LocalGov.Umbraco.AlertBanner\LocalGov.Umbraco.AlertBanner.csproj" />
+  </ItemGroup>
+</Project>

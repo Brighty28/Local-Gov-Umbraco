@@ -1,0 +1,32 @@
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+
+    <!-- Package metadata shared across all packages -->
+    <Authors>LocalGov Umbraco Community</Authors>
+    <Company>LocalGov Umbraco</Company>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Brighty28/Local-Gov-Umbraco</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Brighty28/Local-Gov-Umbraco</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>umbraco;localgov;uk-local-government;govuk-frontend;local-gov</PackageTags>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Copyright>Copyright © LocalGov Umbraco Community</Copyright>
+
+    <!-- Version — overridden by CI via /p:Version=$(GitVersion) -->
+    <Version>1.0.0</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+  </PropertyGroup>
+
+  <!-- uSync config files: the RCL SDK already includes them implicitly as Content.
+       Use Update (not Include) to set packaging metadata on the already-included items. -->
+  <ItemGroup>
+    <Content Update="uSync\**\*" CopyToOutputDirectory="PreserveNewest" Pack="true" PackagePath="contentFiles\any\any\uSync\" />
+  </ItemGroup>
+</Project>

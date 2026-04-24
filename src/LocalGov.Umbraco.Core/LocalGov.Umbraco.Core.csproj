@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <PackageId>LocalGov.Umbraco.Core</PackageId>
+    <Title>LocalGov Umbraco - Core</Title>
+    <Description>Core infrastructure for LocalGov Umbraco — shared compositions, content helper, navigation, breadcrumb, pagination, and search. Required by all other LocalGov Umbraco packages.</Description>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Umbraco.Cms.Web.Website" />
+    <PackageReference Include="Umbraco.Cms.Web.BackOffice" />
+    <PackageReference Include="uSync.Core" />
+  </ItemGroup>
+
+  <!-- Embed uSync config files as content so they're included in the NuGet package -->
+  <ItemGroup>
+    <None Include="..\..\assets\icon.png" Pack="true" PackagePath="icon.png" Condition="Exists('..\..\assets\icon.png')" />
+    <None Include="README.md" Pack="true" PackagePath="README.md" Condition="Exists('README.md')" />
+  </ItemGroup>
+
+</Project>

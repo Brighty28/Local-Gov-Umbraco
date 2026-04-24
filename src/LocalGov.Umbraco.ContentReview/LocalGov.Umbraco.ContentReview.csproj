@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+  <PropertyGroup>
+    <PackageId>LocalGov.Umbraco.ContentReview</PackageId>
+    <Title>LocalGov Umbraco - Content Review</Title>
+    <Description>Content review tracking, owner assignment, and automated email reminders for UK local government websites. Critical for LGR content governance. No LocalGov Drupal equivalent.</Description>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Umbraco.Cms.Web.Website" />
+    <PackageReference Include="Umbraco.Cms.Web.BackOffice" />
+    <PackageReference Include="Cultiv.Hangfire" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LocalGov.Umbraco.Core\LocalGov.Umbraco.Core.csproj" />
+  </ItemGroup>
+</Project>

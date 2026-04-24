@@ -1,0 +1,25 @@
+{
+  "$schema": "https://marketplace.umbraco.com/umbraco-marketplace-schema.json",
+  "name": "LocalGov.Umbraco",
+  "friendlyName": "LocalGov Umbraco",
+  "description": "The complete LocalGov Umbraco distribution for UK local government websites. Equivalent to LocalGov Drupal with GOV.UK Frontend design system, WCAG 2.1 AA compliance, and features built for Local Government Reorganisation (LGR).",
+  "version": "1.0.0",
+  "minimumUmbracoVersion": "13.0.0",
+  "maximumUmbracoVersion": "13.99.99",
+  "tags": [
+    "LocalGov",
+    "UK Local Government",
+    "GOV.UK Frontend",
+    "LGR",
+    "WCAG",
+    "Accessibility",
+    "News",
+    "Services",
+    "Alert Banner",
+    "Guides"
+  ],
+  "logo": "https://raw.githubusercontent.com/Brighty28/Local-Gov-Umbraco/main/assets/icon.png",
+  "projectUrl": "https://github.com/Brighty28/Local-Gov-Umbraco",
+  "licenseUrl": "https://github.com/Brighty28/Local-Gov-Umbraco/blob/main/LICENSE",
+  "bugTrackerUrl": "https://github.com/Brighty28/Local-Gov-Umbraco/issues"
+}

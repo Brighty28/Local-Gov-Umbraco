@@ -1,0 +1,33 @@
+@model LocalGov.Umbraco.Core.ViewComponents.SideNavModel
+
+@{
+    void RenderItems(IEnumerable<LocalGov.Umbraco.Core.ViewComponents.SideNavItem> items, int depth)
+    {
+        <ul class="govuk-list localgov-side-nav__list localgov-side-nav__list--level-@depth">
+            @foreach (var item in items)
+            {
+                <li class="localgov-side-nav__item @(item.IsActive ? "localgov-side-nav__item--active" : "")">
+                    <a class="govuk-link govuk-link--no-visited-state @(item.IsActive ? "localgov-side-nav__link--active" : "")"
+                       href="@item.Url"
+                       @(item.IsActive ? "aria-current=\"page\"" : "")>
+                        @item.Name
+                    </a>
+                    @if (item.IsActive && item.Children?.Any() == true)
+                    {
+                        RenderItems(item.Children, depth + 1);
+                    }
+                </li>
+            }
+        </ul>
+    }
+}
+
+@if (Model?.Items.Any() == true)
+{
+    <nav class="localgov-side-nav" aria-label="Section navigation">
+        <h2 class="localgov-side-nav__header">
+            <a class="govuk-link govuk-link--no-visited-state" href="@Model.Root.Url">@Model.Root.Name</a>
+        </h2>
+        @{ RenderItems(Model.Items, 1); }
+    </nav>
+}

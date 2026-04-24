@@ -1,0 +1,35 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Umbraco -->
+    <PackageVersion Include="Umbraco.Cms" Version="13.12.1" />
+    <PackageVersion Include="Umbraco.Cms.Core" Version="13.12.1" />
+    <PackageVersion Include="Umbraco.Cms.Infrastructure" Version="13.12.1" />
+    <PackageVersion Include="Umbraco.Cms.Web.BackOffice" Version="13.12.1" />
+    <PackageVersion Include="Umbraco.Cms.Web.Website" Version="13.12.1" />
+    <PackageVersion Include="Umbraco.Cms.Imaging.ImageSharp" Version="13.12.1" />
+    <PackageVersion Include="Umbraco.Forms" Version="13.8.0" />
+
+    <!-- uSync -->
+    <PackageVersion Include="uSync" Version="13.3.2" />
+    <PackageVersion Include="uSync.Core" Version="13.3.2" />
+
+    <!-- Background tasks -->
+    <PackageVersion Include="Cultiv.Hangfire" Version="3.1.2" />
+
+    <!-- Microsoft -->
+    <PackageVersion Include="Microsoft.AspNetCore.Html.Abstractions" Version="2.3.0" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
+
+    <!-- Testing -->
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+    <PackageVersion Include="xunit" Version="2.6.6" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.6" />
+    <PackageVersion Include="Moq" Version="4.20.70" />
+    <PackageVersion Include="FluentAssertions" Version="6.12.0" />
+  </ItemGroup>
+</Project>

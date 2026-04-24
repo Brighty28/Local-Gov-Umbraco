@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+  <PropertyGroup>
+    <PackageId>LocalGov.Umbraco.News</PackageId>
+    <Title>LocalGov Umbraco - News</Title>
+    <Description>News articles, newsroom archive, category filtering, and homepage news strip for UK local government websites. Equivalent of LocalGov Drupal's localgov_news module.</Description>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Umbraco.Cms.Web.Website" />
+    <PackageReference Include="Cultiv.Hangfire" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LocalGov.Umbraco.Core\LocalGov.Umbraco.Core.csproj" />
+  </ItemGroup>
+</Project>

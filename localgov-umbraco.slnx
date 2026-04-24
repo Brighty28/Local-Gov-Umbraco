@@ -1,0 +1,19 @@
+<Solution>
+  <Folder Name="/meta/">
+    <Project Path="meta/LocalGov.Umbraco/LocalGov.Umbraco.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/LocalGov.Umbraco.AlertBanner/LocalGov.Umbraco.AlertBanner.csproj" />
+    <Project Path="src/LocalGov.Umbraco.ContentReview/LocalGov.Umbraco.ContentReview.csproj" />
+    <Project Path="src/LocalGov.Umbraco.Core/LocalGov.Umbraco.Core.csproj" />
+    <Project Path="src/LocalGov.Umbraco.Guides/LocalGov.Umbraco.Guides.csproj" />
+    <Project Path="src/LocalGov.Umbraco.News/LocalGov.Umbraco.News.csproj" />
+    <Project Path="src/LocalGov.Umbraco.Services/LocalGov.Umbraco.Services.csproj" />
+    <Project Path="src/LocalGov.Umbraco.StepByStep/LocalGov.Umbraco.StepByStep.csproj" />
+    <Project Path="src/LocalGov.Umbraco.Theme/LocalGov.Umbraco.Theme.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/LocalGov.Umbraco.Core.Tests/LocalGov.Umbraco.Core.Tests.csproj" />
+    <Project Path="tests/LocalGov.Umbraco.News.Tests/LocalGov.Umbraco.News.Tests.csproj" />
+  </Folder>
+</Solution>

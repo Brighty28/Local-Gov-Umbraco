@@ -1,0 +1,39 @@
+# Build output
+bin/
+obj/
+nupkgs/
+
+# .NET
+*.user
+*.suo
+.vs/
+*.DotSettings.user
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+
+# VS Code
+.vscode/
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+project.lock.json
+
+# Umbraco
+**/App_Data/
+**/umbraco/Data/
+**/umbraco/Logs/
+**/umbraco/models/
+**/Temp/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets
+appsettings.*.json
+!appsettings.json
+!appsettings.Development.json

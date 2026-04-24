@@ -1,0 +1,59 @@
+@using LocalGov.Umbraco.AlertBanner.Services
+@model IEnumerable<LocalGov.Umbraco.AlertBanner.Services.AlertModel>
+
+@foreach (var alert in Model)
+{
+    var severityCss = alert.Severity switch
+    {
+        AlertSeverity.Major => "localgov-alert--major",
+        AlertSeverity.NotableDeath => "localgov-alert--notable-death",
+        AlertSeverity.Minor => "localgov-alert--minor",
+        _ => "localgov-alert--announcement"
+    };
+
+    var role = alert.Severity is AlertSeverity.Major or AlertSeverity.NotableDeath ? "alert" : "region";
+
+    <div class="govuk-notification-banner localgov-alert @severityCss"
+         role="@role"
+         aria-label="@alert.Title"
+         @(alert.IsDismissible ? $"data-localgov-dismissal-key=\"{alert.DismissalKey}\"" : "")
+         data-localgov-alert>
+
+        <div class="govuk-notification-banner__header">
+            <h2 class="govuk-notification-banner__title">
+                @alert.Title
+            </h2>
+            @if (alert.IsDismissible)
+            {
+                <button class="govuk-button govuk-button--secondary localgov-alert__dismiss"
+                        data-localgov-dismiss-alert
+                        aria-label="Dismiss alert: @alert.Title">
+                    Dismiss
+                </button>
+            }
+        </div>
+
+        @if (!string.IsNullOrWhiteSpace(alert.Body))
+        {
+            <div class="govuk-notification-banner__content">
+                <p class="govuk-body">@Html.Raw(alert.Body)</p>
+            </div>
+        }
+    </div>
+}
+
+<script>
+    (function () {
+        document.querySelectorAll('[data-localgov-dismiss-alert]').forEach(function (btn) {
+            var banner = btn.closest('[data-localgov-alert]');
+            var key = banner && banner.getAttribute('data-localgov-dismissal-key');
+            if (key && localStorage.getItem(key)) {
+                banner.style.display = 'none';
+            }
+            btn.addEventListener('click', function () {
+                if (key) localStorage.setItem(key, '1');
+                if (banner) banner.style.display = 'none';
+            });
+        });
+    })();
+</script>

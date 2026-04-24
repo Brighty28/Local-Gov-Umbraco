@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>LocalGov.Umbraco</PackageId>
+    <Title>LocalGov Umbraco</Title>
+    <Description>The complete LocalGov Umbraco distribution for UK local government websites. Installs all Phase 1 modules: Core, Theme (GOV.UK Frontend), Services, News, Alert Banners, Guides, Step By Step, and Content Review. The Umbraco CMS equivalent of LocalGov Drupal — ready for Local Government Reorganisation (LGR).</Description>
+    <IsPackable>true</IsPackable>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <!-- Opt out of CPM for this project — it uses ProjectReferences, not NuGet packages, in the monorepo -->
+    <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+
+  <!-- In the monorepo, reference sibling projects directly.
+       The CI publish step generates package dependencies automatically from the ProjectReferences. -->
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\LocalGov.Umbraco.Core\LocalGov.Umbraco.Core.csproj" PrivateAssets="none" />
+    <ProjectReference Include="..\..\src\LocalGov.Umbraco.Theme\LocalGov.Umbraco.Theme.csproj" PrivateAssets="none" />
+    <ProjectReference Include="..\..\src\LocalGov.Umbraco.Services\LocalGov.Umbraco.Services.csproj" PrivateAssets="none" />
+    <ProjectReference Include="..\..\src\LocalGov.Umbraco.News\LocalGov.Umbraco.News.csproj" PrivateAssets="none" />
+    <ProjectReference Include="..\..\src\LocalGov.Umbraco.AlertBanner\LocalGov.Umbraco.AlertBanner.csproj" PrivateAssets="none" />
+    <ProjectReference Include="..\..\src\LocalGov.Umbraco.Guides\LocalGov.Umbraco.Guides.csproj" PrivateAssets="none" />
+    <ProjectReference Include="..\..\src\LocalGov.Umbraco.StepByStep\LocalGov.Umbraco.StepByStep.csproj" PrivateAssets="none" />
+    <ProjectReference Include="..\..\src\LocalGov.Umbraco.ContentReview\LocalGov.Umbraco.ContentReview.csproj" PrivateAssets="none" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\assets\icon.png" Pack="true" PackagePath="icon.png" Condition="Exists('..\..\assets\icon.png')" />
+    <None Include="README.md" Pack="true" PackagePath="README.md" Condition="Exists('README.md')" />
+    <None Include="umbraco-marketplace.json" Pack="true" PackagePath="umbraco-marketplace.json" />
+  </ItemGroup>
+
+</Project>
