@@ -13,4 +13,7 @@
     <ProjectReference Include="..\LocalGov.Umbraco.Core\LocalGov.Umbraco.Core.csproj" />
     <ProjectReference Include="..\LocalGov.Umbraco.AlertBanner\LocalGov.Umbraco.AlertBanner.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="uSync\**\*.config" />
+  </ItemGroup>
 </Project>

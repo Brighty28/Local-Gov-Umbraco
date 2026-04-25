@@ -16,5 +16,8 @@
     <ProjectReference Include="..\LocalGov.Umbraco.Core\LocalGov.Umbraco.Core.csproj" />
   </ItemGroup>
 
-</Project>
+  <ItemGroup>
+    <EmbeddedResource Include="uSync\**\*.config" />
+  </ItemGroup>
 
+</Project>
