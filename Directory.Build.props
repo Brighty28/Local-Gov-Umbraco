@@ -17,10 +17,13 @@
     <PackageIcon>icon.png</PackageIcon>
     <Copyright>Copyright © LocalGov Umbraco Community</Copyright>
 
-    <!-- Version — overridden by CI via /p:Version=$(GitVersion) -->
+    <!-- Version — overridden by CI / pack via /p:Version=$(GitVersion).
+         AssemblyVersion and FileVersion derive from Version so the
+         compiled DLL identity always matches the package version,
+         which keeps consumer binding redirects in lockstep. -->
     <Version>1.0.0</Version>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
+    <AssemblyVersion>$(Version.Split('-')[0]).0</AssemblyVersion>
+    <FileVersion>$(Version.Split('-')[0]).0</FileVersion>
   </PropertyGroup>
 
   <!-- uSync config files ship as EmbeddedResource so the runtime deployment component
