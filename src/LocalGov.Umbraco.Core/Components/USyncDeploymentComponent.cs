@@ -11,17 +11,21 @@ namespace LocalGov.Umbraco.Core.Components;
 /// </summary>
 public class USyncDeploymentComponent(IHostEnvironment hostEnvironment, ILogger<USyncDeploymentComponent> logger) : IComponent
 {
-    private const string USyncPathPrefix = "uSync/v13/";
-
     public void Initialize()
     {
         var siteRoot = hostEnvironment.ContentRootPath;
-        var assemblies = GetLocalGovAssemblies();
+        var assemblies = GetLocalGovAssemblies().ToList();
 
+        logger.LogInformation("LocalGov uSync: deploying configs from {Count} assemblies to {Root}",
+            assemblies.Count, siteRoot);
+
+        var totalWritten = 0;
         foreach (var assembly in assemblies)
         {
-            DeployUSyncFilesFromAssembly(assembly, siteRoot);
+            totalWritten += DeployUSyncFilesFromAssembly(assembly, siteRoot);
         }
+
+        logger.LogInformation("LocalGov uSync: deployment complete — wrote {Count} config files", totalWritten);
     }
 
     public void Terminate() { }
@@ -30,30 +34,43 @@ public class USyncDeploymentComponent(IHostEnvironment hostEnvironment, ILogger<
         AppDomain.CurrentDomain.GetAssemblies()
             .Where(a => a.FullName?.StartsWith("LocalGov.Umbraco.", StringComparison.OrdinalIgnoreCase) == true);
 
-    private void DeployUSyncFilesFromAssembly(Assembly assembly, string siteRoot)
+    private int DeployUSyncFilesFromAssembly(Assembly assembly, string siteRoot)
     {
         var resourceNames = assembly.GetManifestResourceNames()
-            .Where(n => n.Contains(".uSync.v13."));
+            .Where(n => n.Contains(".uSync.v13."))
+            .ToList();
 
+        if (resourceNames.Count == 0)
+        {
+            return 0;
+        }
+
+        var written = 0;
         foreach (var resourceName in resourceNames)
         {
             try
             {
                 var filePath = ResourceNameToFilePath(resourceName, assembly, siteRoot);
-                if (filePath == null || File.Exists(filePath)) continue;
+                if (filePath == null) continue;
 
                 Directory.CreateDirectory(Path.GetDirectoryName(filePath)!);
+
+                // Always overwrite — keeps deployed files in sync with the
+                // currently-installed package version and corrects case-
+                // mismatched leftovers from earlier installs on Windows.
                 using var stream = assembly.GetManifestResourceStream(resourceName)!;
                 using var fileStream = File.Create(filePath);
                 stream.CopyTo(fileStream);
+                written++;
 
-                logger.LogDebug("LocalGov uSync: deployed {File}", filePath);
+                logger.LogInformation("LocalGov uSync: wrote {File}", filePath);
             }
             catch (Exception ex)
             {
                 logger.LogWarning(ex, "LocalGov uSync: failed to deploy resource {Resource}", resourceName);
             }
         }
+        return written;
     }
 
     private static string? ResourceNameToFilePath(string resourceName, Assembly assembly, string siteRoot)
