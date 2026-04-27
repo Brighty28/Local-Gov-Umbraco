@@ -17,12 +17,20 @@
     <PackageIcon>icon.png</PackageIcon>
     <Copyright>Copyright © LocalGov Umbraco Community</Copyright>
 
-    <!-- Version — overridden by CI / pack via /p:Version=$(GitVersion).
-         AssemblyVersion and FileVersion derive from Version so the
-         compiled DLL identity always matches the package version,
-         which keeps consumer binding redirects in lockstep. -->
+    <!--
+      Versioning strategy:
+        Version            — NuGet package version, varies per release.
+        AssemblyVersion    — PINNED to 1.0.0.0 across all 1.x releases so the
+                             compiled DLL identity is stable. Inter-package
+                             references (e.g. AlertBanner.dll → Core.dll) embed
+                             this version at build time, so changing it would
+                             break already-built consumer apps. Bump only on
+                             a major release with intentional breaking changes.
+        FileVersion        — Tracks Version (with pre-release suffix stripped
+                             so it remains a valid 4-part numeric version).
+    -->
     <Version>1.0.0</Version>
-    <AssemblyVersion>$(Version.Split('-')[0]).0</AssemblyVersion>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>$(Version.Split('-')[0]).0</FileVersion>
   </PropertyGroup>
 
