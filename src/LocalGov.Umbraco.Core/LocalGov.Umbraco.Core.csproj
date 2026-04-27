@@ -14,12 +14,7 @@
     <PackageReference Include="uSync" />
   </ItemGroup>
 
-  <!-- Embed uSync configs into the assembly so USyncDeploymentComponent can
-       extract them to the consuming site's uSync folder on first start. -->
-  <ItemGroup>
-    <EmbeddedResource Include="uSync\**\*.config" />
-  </ItemGroup>
-
+  <!-- Embed uSync config files as content so they're included in the NuGet package -->
   <ItemGroup>
     <None Include="..\..\assets\icon.png" Pack="true" PackagePath="icon.png" Condition="Exists('..\..\assets\icon.png')" />
     <None Include="README.md" Pack="true" PackagePath="README.md" Condition="Exists('README.md')" />
