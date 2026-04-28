@@ -80,22 +80,13 @@ stages:
             meta/LocalGov.Umbraco/LocalGov.Umbraco.csproj
           arguments: '--configuration $(BuildConfiguration) --no-restore'
 
-      # Pack each module package individually using --no-build so the binaries
-      # produced in the Build step above are reused (avoids the file-lock
-      # issues that come from rebuilding the same DLLs in parallel).
+      # Pack each module package using a single glob. packagesToPack does NOT
+      # split on newlines — it expects one glob (or semicolon-separated globs).
       - task: DotNetCoreCLI@2
         displayName: 'Pack module packages'
         inputs:
           command: 'pack'
-          packagesToPack: |
-            src/LocalGov.Umbraco.AlertBanner/LocalGov.Umbraco.AlertBanner.csproj
-            src/LocalGov.Umbraco.ContentReview/LocalGov.Umbraco.ContentReview.csproj
-            src/LocalGov.Umbraco.Core/LocalGov.Umbraco.Core.csproj
-            src/LocalGov.Umbraco.Guides/LocalGov.Umbraco.Guides.csproj
-            src/LocalGov.Umbraco.News/LocalGov.Umbraco.News.csproj
-            src/LocalGov.Umbraco.Services/LocalGov.Umbraco.Services.csproj
-            src/LocalGov.Umbraco.StepByStep/LocalGov.Umbraco.StepByStep.csproj
-            src/LocalGov.Umbraco.Theme/LocalGov.Umbraco.Theme.csproj
+          packagesToPack: 'src/**/LocalGov.Umbraco.*.csproj'
           versioningScheme: 'byEnvVar'
           versionEnvVar: 'PackageVersion'
           configuration: '$(BuildConfiguration)'
