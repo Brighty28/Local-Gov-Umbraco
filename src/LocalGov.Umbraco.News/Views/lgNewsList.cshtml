@@ -1,6 +1,6 @@
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
-    Layout = "_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
     var page = ViewContext.HttpContext.Request.Query.ContainsKey("page")
         ? int.TryParse(ViewContext.HttpContext.Request.Query["page"], out var p) ? p : 1
         : 1;

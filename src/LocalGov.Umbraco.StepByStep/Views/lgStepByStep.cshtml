@@ -1,7 +1,7 @@
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @using Umbraco.Extensions
 @{
-    Layout = "_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
     var steps = Model.Children?.Where(c => c.IsVisible()).ToList()
                 ?? new List<Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent>();
 }
