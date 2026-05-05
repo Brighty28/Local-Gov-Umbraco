@@ -1,0 +1,13 @@
+// 7-1 SCSS architecture entry point.
+// Each subfolder owns one concern; this file just re-exports the partials
+// in a sensible order so cascade specificity is predictable.
+//
+// Order matters: abstracts → vendors → base → layout → components → pages → themes.
+
+@use 'abstracts';
+@use 'vendors';
+@use 'base';
+@use 'layout';
+@use 'components';
+@use 'pages';
+@use 'themes';

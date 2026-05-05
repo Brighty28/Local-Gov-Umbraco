@@ -1,0 +1,5 @@
+// abstracts/
+//   Sass-only artefacts: variables, functions, mixins, placeholders.
+//   Nothing here should emit CSS on its own.
+
+@forward 'variables';

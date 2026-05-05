@@ -1,0 +1,16 @@
+// LocalGov design tokens — mapped onto CSS custom properties at runtime so
+// the lgSettings primaryColour / secondaryColour fields can override them
+// per-site without recompiling SCSS.
+
+$breakpoints: (
+  'mobile': 320px,
+  'tablet': 641px,
+  'desktop': 769px,
+  'wide': 1281px
+);
+
+$spacing-unit: 8px;
+
+// Brand colour fallbacks — GOV.UK Design System palette.
+$colour-primary: #1d70b8 !default;
+$colour-secondary: #003078 !default;

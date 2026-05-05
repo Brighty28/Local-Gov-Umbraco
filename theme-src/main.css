@@ -1,0 +1,19 @@
+/*
+ * LocalGov theme entry — processed by PostCSS.
+ *
+ * Pipeline:
+ *   1. postcss-import resolves @import statements (including .tmp/scss.css)
+ *   2. tailwindcss/nesting normalises CSS nesting syntax for Tailwind
+ *   3. tailwindcss expands @tailwind directives into utility classes
+ *   4. autoprefixer adds vendor prefixes
+ *   5. cssnano minifies
+ *
+ * Output: ../src/LocalGov.Umbraco.Theme/wwwroot/localgov/theme/localgov.css
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 7-1 SCSS architecture (compiled separately by sass and imported here) */
+@import './.tmp/scss.css';

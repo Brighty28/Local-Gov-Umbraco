@@ -7,8 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@(ViewData["Title"] ?? Model?.Name) - @(ViewData["SiteName"] ?? "LocalGov Umbraco")</title>
 
-    <link rel="stylesheet" href="/_content/LocalGov.Umbraco.Theme/localgov/theme/govuk-frontend.min.css">
-    <link rel="stylesheet" href="/_content/LocalGov.Umbraco.Theme/localgov/theme/localgov.css">
+    <link rel="stylesheet" href="/css/localgov.css" />
 
     @RenderSection("Head", required: false)
 
@@ -65,9 +64,8 @@
         </div>
     </footer>
 
-    <script type="module" src="/_content/LocalGov.Umbraco.Theme/localgov/theme/govuk-frontend.min.js"></script>
     <script type="module">
-        import { initAll } from '/_content/LocalGov.Umbraco.Theme/localgov/theme/govuk-frontend.min.js'
+        import { initAll } from '/js/localgov.js'
         initAll()
     </script>
 

@@ -16,6 +16,9 @@
     <!-- uSync: the full metapackage pulls in uSync.BackOffice, required for startup import of embedded schemas -->
     <PackageVersion Include="uSync" Version="13.3.2" />
 
+    <!-- Asset bundling — replaces Smidge -->
+    <PackageVersion Include="LigerShark.WebOptimizer.Core" Version="3.0.443" />
+
     <!-- Background tasks -->
     <PackageVersion Include="Cultiv.Hangfire" Version="3.1.2" />
 
