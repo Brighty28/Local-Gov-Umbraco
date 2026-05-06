@@ -13,4 +13,45 @@ $spacing-unit: 8px;
 
 // Brand colour fallbacks — GOV.UK Design System palette.
 $colour-primary: #1d70b8 !default;
+$colour-primary-darker: #003078 !default;
 $colour-secondary: #003078 !default;
+$colour-surface: #ffffff !default;
+$colour-surface-muted: #f8f9fa !default;
+$colour-border: #e5e7eb !default;
+$colour-text-muted: #4b5563 !default;
+$colour-warning: #f47738 !default;
+$colour-critical: #d4351c !default;
+$colour-focus: #ffdd00 !default;
+
+// Radii
+$radius-sm: 0.25rem;
+$radius:    0.5rem;
+$radius-lg: 0.75rem;
+
+// Shadows
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow:    0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+
+// Motion
+$transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+
+// Re-emit as CSS custom properties so lgSettings ContentType can override at runtime.
+:root {
+  --localgov-primary-colour: #{$colour-primary};
+  --localgov-primary-colour-darker: #{$colour-primary-darker};
+  --localgov-secondary-colour: #{$colour-secondary};
+  --localgov-surface: #{$colour-surface};
+  --localgov-surface-muted: #{$colour-surface-muted};
+  --localgov-border: #{$colour-border};
+  --localgov-text-muted: #{$colour-text-muted};
+  --localgov-radius: #{$radius};
+  --localgov-radius-sm: #{$radius-sm};
+  --localgov-radius-lg: #{$radius-lg};
+  --localgov-shadow-sm: #{$shadow-sm};
+  --localgov-shadow: #{$shadow};
+  --localgov-shadow-md: #{$shadow-md};
+  --localgov-shadow-lg: #{$shadow-lg};
+  --localgov-transition: #{$transition};
+}

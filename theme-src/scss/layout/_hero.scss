@@ -1,0 +1,28 @@
+.localgov-hero {
+  background: linear-gradient(135deg,
+    var(--localgov-surface-muted) 0%,
+    #eef2ff 100%);
+  padding: 3rem 0 3.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--localgov-border);
+}
+
+.localgov-hero__title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+
+.localgov-hero__lede {
+  font-size: 1.25rem;
+  line-height: 1.5;
+  color: var(--localgov-text-muted);
+  max-width: 50rem;
+}
+
+@media (max-width: 40.0625em) {
+  .localgov-hero {
+    padding: 2rem 0 2.5rem;
+  }
+}

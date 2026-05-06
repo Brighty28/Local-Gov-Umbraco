@@ -1,0 +1,55 @@
+.app-step-nav {
+  background: var(--localgov-surface);
+  border: 1px solid var(--localgov-border);
+  border-radius: var(--localgov-radius);
+  padding: 1.5rem 2rem;
+  margin: 2rem 0;
+}
+
+.app-step-nav__steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: steps;
+}
+
+.app-step-nav__step {
+  position: relative;
+  padding: 1rem 0 1rem 3rem;
+  border-bottom: 1px solid var(--localgov-border);
+}
+
+.app-step-nav__step:last-child {
+  border-bottom: 0;
+}
+
+.app-step-nav__circle {
+  position: absolute;
+  left: 0;
+  top: 1rem;
+  width: 2rem;
+  height: 2rem;
+  background: var(--localgov-primary-colour);
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.app-step-nav__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+}
+
+.app-step-nav__panel {
+  margin-top: 0.75rem;
+}
+
+@media (max-width: 40.0625em) {
+  .app-step-nav {
+    padding: 1rem 1.25rem;
+  }
+}

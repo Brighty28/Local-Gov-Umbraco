@@ -1,0 +1,60 @@
+.localgov-pagination {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--localgov-border);
+}
+
+.localgov-pagination__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.localgov-pagination__item a {
+  display: inline-flex;
+  align-items: center;
+  min-width: 2.5rem;
+  height: 2.5rem;
+  padding: 0 0.75rem;
+  border: 1px solid transparent;
+  border-radius: var(--localgov-radius-sm);
+  text-decoration: none;
+  color: var(--localgov-secondary-colour);
+  transition: background-color var(--localgov-transition),
+              border-color var(--localgov-transition);
+}
+
+.localgov-pagination__item a:hover {
+  background-color: var(--localgov-surface-muted);
+  border-color: var(--localgov-border);
+  text-decoration: none;
+}
+
+.localgov-pagination__item--current a {
+  background-color: var(--localgov-primary-colour);
+  border-color: var(--localgov-primary-colour);
+  color: var(--localgov-surface);
+  font-weight: 700;
+}
+
+.localgov-pagination__item--current a:hover {
+  background-color: var(--localgov-primary-colour-darker);
+  border-color: var(--localgov-primary-colour-darker);
+  color: var(--localgov-surface);
+}
+
+.localgov-pagination__item--ellipsis {
+  padding: 0 0.5rem;
+  color: var(--localgov-text-muted);
+}
+
+.localgov-pagination__icon {
+  width: 0.9375rem;
+  height: 0.8125rem;
+  vertical-align: middle;
+  fill: currentColor;
+}

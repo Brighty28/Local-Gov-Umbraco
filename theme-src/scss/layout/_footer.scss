@@ -1,0 +1,28 @@
+.govuk-footer {
+  background-color: var(--localgov-secondary-colour);
+  color: rgba(255, 255, 255, 0.85);
+  border-top: 0;
+  padding: 3rem 0 2rem;
+  margin-top: 4rem;
+}
+
+.govuk-footer__meta {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 1.5rem;
+  margin-top: 2rem;
+}
+
+.govuk-footer__link {
+  color: #ffffff;
+}
+
+.govuk-footer__link:hover {
+  color: #ffffff;
+  text-decoration-thickness: 2px;
+}
+
+.govuk-footer__link:focus {
+  background-color: #ffdd00;
+  color: #0b0c0c;
+  box-shadow: 0 -2px #ffdd00, 0 4px #0b0c0c;
+}

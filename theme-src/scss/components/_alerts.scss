@@ -1,0 +1,44 @@
+.govuk-notification-banner {
+  border-radius: var(--localgov-radius-sm);
+  box-shadow: var(--localgov-shadow);
+}
+
+.localgov-alert--announcement {
+  border-color: var(--localgov-primary-colour);
+}
+
+.localgov-alert--announcement .govuk-notification-banner__header {
+  background-color: var(--localgov-primary-colour);
+  color: #ffffff;
+}
+
+.localgov-alert--announcement .govuk-notification-banner__title {
+  color: #ffffff;
+}
+
+.localgov-alert--warning,
+.localgov-alert--minor {
+  border-color: #f47738;
+}
+
+.localgov-alert--warning .govuk-notification-banner__header,
+.localgov-alert--minor .govuk-notification-banner__header {
+  background-color: #f47738;
+  color: #0b0c0c;
+}
+
+.localgov-alert--critical,
+.localgov-alert--major {
+  border-color: #d4351c;
+}
+
+.localgov-alert--critical .govuk-notification-banner__header,
+.localgov-alert--major .govuk-notification-banner__header {
+  background-color: #d4351c;
+  color: #ffffff;
+}
+
+.localgov-alert--critical .govuk-notification-banner__title,
+.localgov-alert--major .govuk-notification-banner__title {
+  color: #ffffff;
+}
