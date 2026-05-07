@@ -1,10 +1,9 @@
 # LocalGov Theme Source
 
-Dev-only SCSS + Tailwind workspace. Compiles to
-`../src/LocalGov.Umbraco.Theme/wwwroot/localgov/theme/localgov.css`,
-which is committed and shipped inside the `LocalGov.Umbraco.Theme`
-NuGet package. **Consumers of the package do not need Node.js** —
-they get the compiled CSS via the meta-package.
+Dev-only SCSS + Tailwind workspace. Compiles each theme to a stylesheet under
+`../src/LocalGov.Umbraco.Theme/wwwroot/localgov/theme/`. The compiled CSS is
+committed and shipped inside the `LocalGov.Umbraco.Theme` NuGet package, so
+**consumers do not need Node.js**.
 
 ## Why isn't this folder showing in Visual Studio?
 
@@ -13,17 +12,39 @@ they get the compiled CSS via the meta-package.
 separately:
 
 - **Recommended**: open the folder in VS Code (`code theme-src`).
-- Alternative: in Visual Studio, *File → Open → Folder...* and pick
-  the `theme-src/` directory.
+- Alternative: in Visual Studio, *File → Open → Folder...* and pick the
+  `theme-src/` directory.
+
+## Themes shipped
+
+Two themes are included; pick one via `appsettings.json` in the consumer site:
+
+| Theme name  | Aesthetic                                      | Output               |
+| ----------- | ---------------------------------------------- | -------------------- |
+| `default`   | GOV.UK Frontend modernised — blue gradient,    | `localgov.css`       |
+|             | rounded cards, subtle shadows.                 |                      |
+| `verdant`   | Forest-green / nature — navy logo block,       | `verdant.css`        |
+|             | white pill nav, sage-cream cards, deep         |                      |
+|             | green primary, photo hero with floating card.  |                      |
+
+```json
+{
+  "LocalGov": { "Theme": "verdant" }
+}
+```
+
+The WebOptimizer pipeline in `LocalGov.Umbraco.Core` reads this on startup and
+bundles the matching CSS file into `/css/localgov.css`. Setting `default` (or
+omitting the value) selects `localgov.css`.
 
 ## Stack
 
-- **Tailwind CSS v3** — utility-first base. Preflight is disabled
-  (we rely on GOV.UK Frontend's typography baseline).
+- **Tailwind CSS v3** — utility-first base. Preflight is disabled (we rely on
+  GOV.UK Frontend's typography baseline).
 - **Sass** — 7-1 architecture for hand-written component / layout styles.
 - **PostCSS** — orchestrates Tailwind + autoprefixer + cssnano.
-- **GOV.UK Frontend** — ships pre-compiled in the Theme RCL alongside
-  this output, bundled together at runtime by WebOptimizer.
+- **GOV.UK Frontend** — ships pre-compiled in the Theme RCL alongside this
+  output, bundled together at runtime by WebOptimizer.
 
 ## One-time setup
 
@@ -35,47 +56,34 @@ npm install
 ## Build
 
 ```bash
-npm run build       # one-shot production build
-npm run watch       # rebuilds on .scss / .css changes
+npm run build           # builds every theme
+npm run build:default   # builds just the default theme
+npm run build:verdant   # builds just the verdant theme
+npm run watch           # rebuilds every theme on .scss / .css changes
 ```
 
-Output goes to `../src/LocalGov.Umbraco.Theme/wwwroot/localgov/theme/localgov.css`.
-**Commit that file alongside your SCSS changes** — it's the actual
-artefact shipped to consumers. The repo intentionally tracks both source
-and compiled output so consumer builds never need Node.
+**Commit the regenerated CSS files alongside SCSS edits.** The repo intentionally
+tracks both source and compiled output so consumer builds never need Node.
 
-## Migrating from Foundation
+## Adding a new theme
 
-1. Strip Foundation `@import` directives from your SCSS — Tailwind
-   utilities replace the Foundation grid, button, and reveal patterns.
-2. Move Foundation grid usage (`row` / `columns`) over to Tailwind
-   (`grid grid-cols-12 gap-4` etc.) or the GOV.UK width container if
-   the area should align with the rest of the GOV.UK frame.
-3. Foundation mixins (e.g. `breakpoint`) translate to Tailwind's
-   responsive prefixes (`md:`, `lg:`) or to plain Sass `@media`
-   queries using the breakpoints in `scss/abstracts/_variables.scss`.
-
-## 7-1 layout
-
-```
-scss/
-├── abstracts/      — variables, mixins, functions (no CSS output)
-├── base/           — typography polish, focus rings, body bg
-├── vendors/        — third-party CSS imported unchanged
-├── layout/         — _header, _footer, _hero
-├── components/     — _buttons, _cards, _navigation, _pagination, _alerts, _news, _step-by-step, _utilities
-├── pages/          — page-specific overrides (use sparingly)
-├── themes/         — council brand variants via CSS variables
-└── main.scss       — entry point
-```
+1. Create `themes/{name}/main.css` and `themes/{name}/scss/main.scss` (copy
+   one of the existing themes as a starting point).
+2. Add `build:{name}:scss`, `build:{name}:css`, `build:{name}`, and
+   `watch:{name}` scripts to `package.json` mirroring the verdant ones.
+3. Add `build:{name}` to the top-level `build` script.
+4. Run `npm run build:{name}` to produce
+   `../src/LocalGov.Umbraco.Theme/wwwroot/localgov/theme/{name}.css`.
+5. Commit the new CSS file.
+6. Set `"LocalGov": { "Theme": "{name}" }` in your consumer site's
+   `appsettings.json` to activate it.
 
 ## How council brand colours flow through
 
-1. Editor sets `primaryColour` (and optionally `secondaryColour`) on
-   the `lgSettings` ContentType in the back office.
-2. `ThemeTagHelper` (in `LocalGov.Umbraco.Theme`) emits an inline
-   `<style>` on every page setting `--localgov-primary-colour` etc.
-   on `:root`.
-3. All component CSS in this workspace references those custom
-   properties — not the SCSS `$colour-primary` variable directly —
-   so brand changes apply instantly without rebuilding CSS.
+1. Editor sets `primaryColour` (and optionally `secondaryColour`) on the
+   `lgSettings` ContentType in the back office.
+2. `ThemeTagHelper` (in `LocalGov.Umbraco.Theme`) emits an inline `<style>` on
+   every page setting `--localgov-primary-colour` etc. on `:root`.
+3. All component CSS in this workspace references those custom properties —
+   not the SCSS `$colour-primary` variable directly — so brand changes apply
+   instantly without rebuilding CSS, and they work across every theme.

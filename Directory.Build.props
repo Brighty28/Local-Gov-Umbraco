@@ -29,7 +29,7 @@
         FileVersion        — Tracks Version (with pre-release suffix stripped
                              so it remains a valid 4-part numeric version).
     -->
-    <Version>1.1.1</Version>
+    <Version>1.2.0</Version>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>$(Version.Split('-')[0]).0</FileVersion>
   </PropertyGroup>

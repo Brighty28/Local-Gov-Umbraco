@@ -1,0 +1,10 @@
+/*
+ * Verdant theme entry — processed by PostCSS.
+ * Output: ../../../src/LocalGov.Umbraco.Theme/wwwroot/localgov/theme/verdant.css
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './.tmp/scss.css';
