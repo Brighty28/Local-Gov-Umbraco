@@ -24,9 +24,15 @@ namespace LocalGov.Umbraco.Core.Composers;
 /// <c>LocalGov.Umbraco.Theme/wwwroot/localgov/theme/{theme}.css</c>. "default" is
 /// special-cased to <c>localgov.css</c> for backward compatibility with v1.0/1.1.
 ///
-/// Bundles produced:
-///   /css/localgov.css — GOV.UK Frontend + selected theme stylesheet
+/// Bundle produced:
+///   /css/localgov.css — Selected theme stylesheet (minified + fingerprinted)
 ///   /js/localgov.js   — GOV.UK Frontend ES module (passed through for cache-busting)
+///
+/// IMPORTANT: GOV.UK Frontend's stylesheet is intentionally NOT bundled. Its
+/// @font-face rules use sibling-folder URLs (../assets/fonts/...) which break
+/// when the file is served from /css/ instead of its RCL location. The Layout
+/// references it directly via /_content/LocalGov.Umbraco.Theme/... so static
+/// assets middleware resolves the relative font paths correctly.
 /// </summary>
 public class WebOptimizerComposer : IComposer
 {
@@ -41,7 +47,6 @@ public class WebOptimizerComposer : IComposer
         {
             pipeline.AddCssBundle(
                 "/css/localgov.css",
-                "/_content/LocalGov.Umbraco.Theme/localgov/theme/govuk-frontend.min.css",
                 $"/_content/LocalGov.Umbraco.Theme/localgov/theme/{themeFile}");
 
             pipeline.AddJavaScriptBundle(
