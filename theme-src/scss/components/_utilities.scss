@@ -1,0 +1,35 @@
+// Small reusable utility classes that consumers can apply directly in views.
+// Tailwind's own utilities are also available; these cover the LocalGov-specific
+// patterns that benefit from semantic names.
+
+.localgov-card {
+  background: var(--localgov-surface);
+  border: 1px solid var(--localgov-border);
+  border-radius: var(--localgov-radius);
+  padding: 1.5rem;
+  box-shadow: var(--localgov-shadow-sm);
+}
+
+.localgov-card--elevated {
+  box-shadow: var(--localgov-shadow-md);
+  border: 0;
+}
+
+.localgov-stack > * + * {
+  margin-top: 1rem;
+}
+
+.localgov-stack--lg > * + * {
+  margin-top: 1.5rem;
+}
+
+.localgov-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+.localgov-muted {
+  color: var(--localgov-text-muted);
+}

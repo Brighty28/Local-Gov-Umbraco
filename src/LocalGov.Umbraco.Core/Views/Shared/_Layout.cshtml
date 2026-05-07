@@ -7,8 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@(ViewData["Title"] ?? Model?.Name) - @(ViewData["SiteName"] ?? "LocalGov Umbraco")</title>
 
-    <link rel="stylesheet" href="/_content/LocalGov.Umbraco.Theme/localgov/theme/govuk-frontend.min.css">
-    <link rel="stylesheet" href="/_content/LocalGov.Umbraco.Theme/localgov/theme/localgov.css">
+    @* GOV.UK Frontend served directly from the RCL so its @font-face URLs
+       (../assets/fonts/...) keep resolving relative to the stylesheet. *@
+    <link rel="stylesheet" href="/_content/LocalGov.Umbraco.Theme/localgov/theme/govuk-frontend.min.css" />
+
+    @* LocalGov theme stylesheet — bundled + minified + fingerprinted by WebOptimizer.
+       Selected via the LocalGov:Theme app-setting. *@
+    <link rel="stylesheet" href="/css/localgov.css" />
 
     @RenderSection("Head", required: false)
 
@@ -21,7 +26,11 @@
 </head>
 <body class="govuk-template__body">
 
-    <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
+    @* GOV.UK Frontend v5 requires the govuk-frontend-supported class on body before
+       initAll() runs. The noModule check is the official feature-detect from the
+       GOV.UK Design System docs — it identifies modern browsers that support the
+       ES module GOV.UK Frontend ships. *@
+    <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
 
     <a href="#main-content" class="govuk-skip-link" data-module="govuk-skip-link">Skip to main content</a>
 
@@ -65,9 +74,8 @@
         </div>
     </footer>
 
-    <script type="module" src="/_content/LocalGov.Umbraco.Theme/localgov/theme/govuk-frontend.min.js"></script>
     <script type="module">
-        import { initAll } from '/_content/LocalGov.Umbraco.Theme/localgov/theme/govuk-frontend.min.js'
+        import { initAll } from '/js/localgov.js'
         initAll()
     </script>
 

@@ -1,0 +1,55 @@
+.localgov-service-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0 3rem;
+}
+
+.localgov-service-card {
+  display: block;
+  padding: 1.5rem;
+  background: var(--localgov-surface);
+  border: 1px solid var(--localgov-border);
+  border-radius: var(--localgov-radius);
+  text-decoration: none;
+  color: inherit;
+  transition: transform var(--localgov-transition),
+              box-shadow var(--localgov-transition),
+              border-color var(--localgov-transition);
+}
+
+.localgov-service-card:hover,
+.localgov-service-card:focus {
+  transform: translateY(-2px);
+  border-color: var(--localgov-primary-colour);
+  box-shadow: var(--localgov-shadow-lg);
+  text-decoration: none;
+  outline: 0;
+}
+
+.localgov-service-card:focus-visible {
+  outline: 3px solid #ffdd00;
+  outline-offset: 2px;
+}
+
+.localgov-service-card__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--localgov-primary-colour);
+  margin: 0 0 0.5rem;
+}
+
+.localgov-service-card__description {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--localgov-text-muted);
+  margin: 0;
+}
+
+@media (max-width: 40.0625em) {
+  .localgov-service-cards {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}

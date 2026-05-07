@@ -1,0 +1,12 @@
+// components/
+//   Reusable UI patterns. Each partial exports rules scoped to a single
+//   class family so deletions are safe.
+
+@use 'buttons';
+@use 'cards';
+@use 'navigation';
+@use 'pagination';
+@use 'alerts';
+@use 'news';
+@use 'step-by-step';
+@use 'utilities';

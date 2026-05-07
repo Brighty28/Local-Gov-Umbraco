@@ -1,0 +1,116 @@
+trigger:
+  branches:
+    include:
+      - release/*
+      - main
+      - hotfix/*
+
+variables:
+  BuildConfiguration: 'Release'
+  # Internal Azure DevOps Artifacts feed (same id as the existing pipeline)
+  InternalFeedId: '742416fd-18df-40cc-8a51-ba296d3ed554'
+
+stages:
+- stage: Build
+  jobs:
+    - job: build
+      displayName: Build and Publish LocalGov Umbraco Packages
+      pool:
+        vmImage: 'windows-latest'
+
+      steps:
+      - checkout: self
+
+      - task: UseDotNet@2
+        displayName: 'Install .NET 8.x SDK'
+        inputs:
+          version: '8.x'
+
+      - task: NuGetToolInstaller@1
+        displayName: 'Install NuGet'
+        inputs:
+          checkLatest: true
+
+      - task: NuGetAuthenticate@1
+        displayName: 'Authenticate against internal NuGet feed'
+
+      - task: PowerShell@2
+        displayName: 'Compute package version from Directory.Build.props'
+        inputs:
+          targetType: 'inline'
+          script: |
+            [xml]$props = Get-Content "$(Build.SourcesDirectory)/Directory.Build.props"
+            $baseVersion = ($props.Project.PropertyGroup.Version | Where-Object { $_ }).ToString().Trim()
+            if (-not $baseVersion) {
+              Write-Error "Version not found in Directory.Build.props"
+              exit 1
+            }
+
+            # main / release/* / hotfix/* publish stable versions; everything else is a CI prerelease.
+            $branch = "$(Build.SourceBranch)"
+            $isStable = ($branch -eq 'refs/heads/main') -or ($branch -like 'refs/heads/release/*') -or ($branch -like 'refs/heads/hotfix/*')
+            if ($isStable) {
+              $packageVersion = $baseVersion
+            } else {
+              $packageVersion = "$baseVersion-ci.$(Build.BuildId)"
+            }
+
+            Write-Host "##vso[task.setvariable variable=PackageVersion]$packageVersion"
+            Write-Host "Package version: $packageVersion"
+
+      # Targeting csproj patterns directly so the pipeline works regardless of
+      # the .sln vs .slnx solution format used by the repo.
+      - task: DotNetCoreCLI@2
+        displayName: 'Restore'
+        inputs:
+          command: 'restore'
+          projects: |
+            src/**/LocalGov.Umbraco.*.csproj
+            meta/LocalGov.Umbraco/LocalGov.Umbraco.csproj
+          feedsToUse: 'select'
+          vstsFeed: '$(InternalFeedId)'
+          includeNuGetOrg: true
+
+      - task: DotNetCoreCLI@2
+        displayName: 'Build'
+        inputs:
+          command: 'build'
+          projects: |
+            src/**/LocalGov.Umbraco.*.csproj
+            meta/LocalGov.Umbraco/LocalGov.Umbraco.csproj
+          arguments: '--configuration $(BuildConfiguration) --no-restore'
+
+      # Pack each module package using a single glob. packagesToPack does NOT
+      # split on newlines — it expects one glob (or semicolon-separated globs).
+      - task: DotNetCoreCLI@2
+        displayName: 'Pack module packages'
+        inputs:
+          command: 'pack'
+          packagesToPack: 'src/**/LocalGov.Umbraco.*.csproj'
+          versioningScheme: 'byEnvVar'
+          versionEnvVar: 'PackageVersion'
+          configuration: '$(BuildConfiguration)'
+          nobuild: true
+          packDirectory: '$(Build.ArtifactStagingDirectory)'
+
+      # Pack the meta package last; its ProjectReferences emit PackageReferences
+      # that match $(PackageVersion), so all 9 nupkgs are version-aligned.
+      - task: DotNetCoreCLI@2
+        displayName: 'Pack meta package'
+        inputs:
+          command: 'pack'
+          packagesToPack: 'meta/LocalGov.Umbraco/LocalGov.Umbraco.csproj'
+          versioningScheme: 'byEnvVar'
+          versionEnvVar: 'PackageVersion'
+          configuration: '$(BuildConfiguration)'
+          nobuild: true
+          packDirectory: '$(Build.ArtifactStagingDirectory)'
+
+      - task: NuGetCommand@2
+        displayName: 'Push NuGet Packages'
+        inputs:
+          command: 'push'
+          packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+          nuGetFeedType: 'internal'
+          allowPackageConflicts: true
+          publishVstsFeed: '$(InternalFeedId)'

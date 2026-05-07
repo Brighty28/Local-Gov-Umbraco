@@ -1,38 +1,44 @@
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Reflection;
-using Umbraco.Cms.Core.Composing;
+using Umbraco.Cms.Core.Events;
+using Umbraco.Cms.Core.Notifications;
 
 namespace LocalGov.Umbraco.Core.Components;
 
 /// <summary>
-/// Materialises embedded uSync config files from installed LocalGov packages
-/// to the site's uSync folder on startup, enabling uSync to discover them.
+/// Materialises embedded uSync config files from all installed LocalGov packages
+/// to the site's uSync folder. Runs via UmbracoApplicationStartingNotification —
+/// the earliest startup hook — so the files are on disk before uSync's import
+/// notification handler fires, ensuring compositions are resolved correctly.
 /// </summary>
-public class USyncDeploymentComponent(IHostEnvironment hostEnvironment, ILogger<USyncDeploymentComponent> logger) : IComponent
+public class USyncDeploymentComponent(
+    IHostEnvironment hostEnvironment,
+    ILogger<USyncDeploymentComponent> logger)
+    : INotificationHandler<UmbracoApplicationStartingNotification>
 {
-    public void Initialize()
+    public void Handle(UmbracoApplicationStartingNotification notification)
     {
         var siteRoot = hostEnvironment.ContentRootPath;
         var assemblies = GetLocalGovAssemblies().ToList();
 
-        logger.LogInformation("LocalGov uSync: deploying configs from {Count} assemblies to {Root}",
+        logger.LogInformation(
+            "LocalGov uSync: deploying configs from {Count} assemblies to {Root}",
             assemblies.Count, siteRoot);
 
         var totalWritten = 0;
         foreach (var assembly in assemblies)
-        {
             totalWritten += DeployUSyncFilesFromAssembly(assembly, siteRoot);
-        }
 
-        logger.LogInformation("LocalGov uSync: deployment complete — wrote {Count} config files", totalWritten);
+        logger.LogInformation(
+            "LocalGov uSync: deployment complete — wrote {Count} config files",
+            totalWritten);
     }
-
-    public void Terminate() { }
 
     private static IEnumerable<Assembly> GetLocalGovAssemblies() =>
         AppDomain.CurrentDomain.GetAssemblies()
-            .Where(a => a.FullName?.StartsWith("LocalGov.Umbraco.", StringComparison.OrdinalIgnoreCase) == true);
+            .Where(a => a.FullName?.StartsWith("LocalGov.Umbraco.",
+                StringComparison.OrdinalIgnoreCase) == true);
 
     private int DeployUSyncFilesFromAssembly(Assembly assembly, string siteRoot)
     {
@@ -41,9 +47,7 @@ public class USyncDeploymentComponent(IHostEnvironment hostEnvironment, ILogger<
             .ToList();
 
         if (resourceNames.Count == 0)
-        {
             return 0;
-        }
 
         var written = 0;
         foreach (var resourceName in resourceNames)
@@ -67,16 +71,18 @@ public class USyncDeploymentComponent(IHostEnvironment hostEnvironment, ILogger<
             }
             catch (Exception ex)
             {
-                logger.LogWarning(ex, "LocalGov uSync: failed to deploy resource {Resource}", resourceName);
+                logger.LogWarning(ex,
+                    "LocalGov uSync: failed to deploy resource {Resource}", resourceName);
             }
         }
         return written;
     }
 
-    private static string? ResourceNameToFilePath(string resourceName, Assembly assembly, string siteRoot)
+    private static string? ResourceNameToFilePath(
+        string resourceName, Assembly assembly, string siteRoot)
     {
         // e.g. LocalGov.Umbraco.Core.uSync.v13.ContentTypes.lgHome.config
-        // → uSync/v13/ContentTypes/lgHome.config
+        //   →  uSync/v13/ContentTypes/lgHome.config
         var ns = assembly.GetName().Name + ".";
         if (!resourceName.StartsWith(ns)) return null;
 
@@ -91,7 +97,6 @@ public class USyncDeploymentComponent(IHostEnvironment hostEnvironment, ILogger<
 
     private static string RestoreConfigExtension(string path)
     {
-        // Path.DirectorySeparatorChar isn't a compile-time constant so we use a runtime check
         var sep = Path.DirectorySeparatorChar.ToString();
         if (path.EndsWith(sep + "config", StringComparison.OrdinalIgnoreCase))
             return path[..^(sep.Length + "config".Length)] + ".config";

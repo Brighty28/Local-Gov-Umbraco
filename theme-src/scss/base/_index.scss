@@ -1,0 +1,35 @@
+// base/
+//   Cross-page baseline rules: typography polish, focus rings, body background.
+//   Tailwind's preflight is disabled, so GOV.UK Frontend handles normalisation.
+
+.govuk-template__body {
+  background-color: var(--localgov-surface);
+}
+
+.govuk-main-wrapper {
+  padding-top: 1.5rem;
+  padding-bottom: 3rem;
+}
+
+.govuk-heading-xl {
+  letter-spacing: -0.02em;
+}
+
+.govuk-heading-l,
+.govuk-heading-m {
+  letter-spacing: -0.01em;
+}
+
+.govuk-link {
+  transition: color var(--localgov-transition);
+}
+
+.govuk-skip-link:focus {
+  background-color: #ffdd00;
+  border-radius: var(--localgov-radius-sm);
+}
+
+.govuk-breadcrumbs {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}

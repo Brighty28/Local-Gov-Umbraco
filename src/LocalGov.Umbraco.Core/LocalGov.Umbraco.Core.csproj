@@ -12,6 +12,7 @@
     <PackageReference Include="Umbraco.Cms.Web.Website" />
     <PackageReference Include="Umbraco.Cms.Web.BackOffice" />
     <PackageReference Include="uSync" />
+    <PackageReference Include="LigerShark.WebOptimizer.Core" />
   </ItemGroup>
 
   <!-- Embed uSync config files as content so they're included in the NuGet package -->

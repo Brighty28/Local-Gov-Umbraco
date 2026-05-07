@@ -1,0 +1,14 @@
+.govuk-button {
+  border-radius: var(--localgov-radius-sm);
+  box-shadow: 0 2px 0 var(--localgov-primary-colour-darker);
+  transition: background-color var(--localgov-transition);
+}
+
+.govuk-button:hover {
+  background-color: var(--localgov-primary-colour-darker);
+}
+
+.govuk-button--secondary {
+  background-color: var(--localgov-surface-muted);
+  box-shadow: 0 2px 0 #b1b4b6;
+}
